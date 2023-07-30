@@ -1,0 +1,18 @@
+logs
+migration
+node_modules
+
+
+# Text editor and IDE
+.vscode
+.DS_STORE
+.netbeans
+.idea
+*.iml
+
+# # Env, temporary and cache
+.env
+docker.env
+tmp
+
+README.md
