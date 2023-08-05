@@ -8,7 +8,7 @@ const { logger } = require('./api/services/logger');
 require("dotenv").config()
 // require passport
 const passport = require('passport');
-require('./api/middleware/passport')(passport);
+require('./api/services/passport')(passport);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
