@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const { clearNoteCache } = require('./middleware/cache')
 const base = "/api/v1";
-
+const { check, param, validationResult, oneOf } = require('express-validator');
 // auth actions
 const { register, login } = require("./controllers/v1/auth/authController");
 // note actions
