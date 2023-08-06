@@ -2,16 +2,20 @@ const auth_messages = require('../../../../config/responses/res_msg_user');
 const db = require('../../../models');
 const UserNote = db.user_notes
 const redisClient = require('../../../../config/databases/redisdb')
-const { logger } = require('../../../services/logger')
 const NoteTypesFactory = require('../../../factories/noteFactory')
 const { note_types } = require('../../../../config/constants')
 const { checkValidationResult } = require('../../../middleware/validate')
 const { body } = require('express-validator');
-
+const Logger = require('../../../services/logger')
+const logger = new Logger()
+const logger1 = new Logger()
 
 /* The `createNote` function is an asynchronous function that handles the creation of a new note. It
 takes in the `req` (request) and `res` (response) objects as parameters. */
 exports.createNote = async (req, res) => {
+  logger.info("==================================== Logger is using singleton pattern ================================")
+  console.log("logger === logger1", logger === logger1)
+
   await body('title', auth_messages.title_is_required).notEmpty().run(req);
   await body('content', auth_messages.content_is_required).notEmpty().run(req);
   await body('type', auth_messages.type_is_required).notEmpty().run(req);

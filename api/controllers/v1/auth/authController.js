@@ -3,19 +3,21 @@ const db = require('../../../models')
 const User = db.user
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
-const { logger } = require('../../../services/logger')
 const { check, body, oneOf } = require('express-validator');
 const { checkValidationResult } = require('../../../middleware/validate')
+const Logger  = require('../../../services/logger')
+const logger = new Logger()
 
 
 /* The `exports.register` function is responsible for handling the registration of a user. */
 exports.register = async (req, res) => {
+
+  logger.info("==================================== Log is using singleton pattern ================================")
   await body('name', auth_messages.name_is_required).notEmpty().run(req);
   await body('email', auth_messages.email_is_required).notEmpty().run(req);
   await body('email', auth_messages.email_is_invalid).isEmail().run(req);
   await body('password', auth_messages.password_is_required).notEmpty().run(req);
   checkValidationResult(req, res, async () => {
-
     try {
       let request_data = {
         name: req.body.name,
